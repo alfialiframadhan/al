@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        /* -----------------------------------------------
+        login page Style
+        Name  : Misbahul Fahmi Fahrezi
+        Youtube : Go For Edu
+        Date    : 30 Oktober 2020
+        ----------------------------------------------- */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc; /* Soft background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Hide scrollbars */
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 20px; /* More rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+            padding: 40px; /* Increased padding for better spacing */
+            width: 320px; /* Slightly wider */
+            text-align: center;
+            border: 1px solid #ddd; /* Light border around the box */
+            transition: transform 0.5s; /* Smooth transition for animation */
+        }
+
+        h2 {
+            margin: 15px 0; /* Space above and below the title */
+            color: #333;
+            font-size: 24px; /* Larger font size for the title */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for text */
+        }
+
+        .inputtext {
+            width: 100%;
+            padding: 12px; /* Slightly larger padding */
+            margin-bottom: 15px;
+            border: 2px solid #007bff; /* Change border color */
+            border-radius: 10px;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s; /* Transition for border and box-shadow */
+            position: relative; /* Position relative to allow absolute positioning of icon */
+        }
+
+        /* Glowing effect when focused */
+        .inputtext:focus {
+            border-color: #0056b3; /* Darker border on focus */
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.8); /* Glowing effect */
+            transition: box-shadow 0.3s ease-in-out; /* Smooth transition for glowing */
+        }
+
+        .tombol {
+            width: 100%;
+            padding: 12px; /* Slightly larger padding */
+            background-color: #007bff;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px; /* Increased font size */
+        }
+
+        .tombol:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        #timer {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .footer {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* Animation styles */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .bounce {
+            animation: bounce 0.6s ease;
+            background-color: #c8e6c9; /* Change background color on success */
+            border: 1px solid #4caf50; /* Change border color on success */
+        }
+
+        /* Eye icon styling */
+        .toggle-password {
+            position: absolute;
+            right: 10px; /* Align the icon to the right */
+            top: 50%; /* Center vertically */
+            transform: translateY(-50%); /* Adjust for vertical centering */
+            cursor: pointer;
+            color: #007bff; /* Icon color */
+            font-size: 20px; /* Icon size */
+            transition: opacity 0.3s ease; /* Smooth transition for opacity */
+        }
+
+        /* Styling for the eye images */
+        .eye-image {
+            width: 50px; /* Set width of the eye image */
+            display: none; /* Initially hidden */
+            margin-bottom: 15px; /* Space below the image */
+        }
+
+        /* Center image container */
+        .eye-image-container {
+            display: flex;
+            justify-content: center; /* Center the image horizontally */
+            margin-bottom: 15px; /* Space below the image */
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container" id="loginContainer">
+    <div class="eye-image-container">
+        <img src="eye-closed.png" id="eyeImage" class="eye-image" alt="Eye Icon"> <!-- Image for eye icon -->
+    </div>
+    <h2>Login</h2>
+    <form name="myform" method="post">
+        <input type="text" name="uname" class="inputtext" autocomplete="off" placeholder="Username" required>
+        
+        <div style="position: relative;"> <!-- Wrap password input and icon -->
+            <input type="password" name="pass" class="inputtext" id="password" autocomplete="off" placeholder="Password" required>
+            <span class="toggle-password" id="togglePassword" onclick="togglePassword()">👁️</span> <!-- Eye icon -->
+        </div>
+        
+        <div id="timer"></div>
+        <input type="button" class="tombol" name="log" id="logbutton" value="Masuk" onclick="myfunction()">
+    </form>
+    <div class="footer">© 2024 LDK KARISMA UAI</div>
+</div>
+
+<script type="text/javascript">
+    function myfunction() {
+        var un = document.forms["myform"]["uname"].value;
+        var pw = document.forms["myform"]["pass"].value;
+        var loginContainer = document.getElementById("loginContainer");
+
+        if (un === "ldkkarismauai2024" && pw === "slogankarisma") {
+            // Add bounce animation on success
+            loginContainer.classList.add("bounce");
+
+            // Remove bounce class after animation ends to allow for re-triggering
+            setTimeout(() => {
+                loginContainer.classList.remove("bounce");
+            }, 600);
+
+            // Redirect to the success page after a brief delay
+            setTimeout(() => {
+                window.open('https://penguruskarisma.uai.my.id/info-umum', '_blank');
+            }, 600); // Delay to allow animation to finish
+        } else {
+            document.getElementById("timer").innerHTML = "Salah";
+            // Add shake animation
+            loginContainer.classList.add("shake");
+
+            // Remove shake class after animation ends to allow for re-triggering
+            setTimeout(() => {
+                loginContainer.classList.remove("shake");
+            }, 500);
+        }
+    }
+
+    function togglePassword() {
+        var passwordInput = document.getElementById("password");
+        var togglePassword = document.getElementById("togglePassword");
+        var eyeImage = document.getElementById("eyeImage");
+
+        // Toggle the password visibility
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text"; // Change input type to text
+            togglePassword.innerHTML = "🙈"; // Change icon to closed eye
+            eyeImage.src = "eye-open.png"; // Change image to open eye
+            eyeImage.style.display = "block"; // Show the eye image
+        } else {
+            passwordInput.type = "password"; // Change input type back to password
+            togglePassword.innerHTML = "👁️"; // Change icon to open eye
+            eyeImage.src = "eye-closed.png"; // Change image to closed eye
+            eyeImage.style.display = "block"; // Show the eye image
+        }
+    }
+</script>
+
+</body>
+</html>
